@@ -345,6 +345,12 @@
         <div class="hint">LED display customization (wording, images, QR codes) comes included. Just share your brand kit below.</div>
       </div>
 
+      <div class="field" id="blackcard-field" style="display:none;">
+        <label for="blackcard">Black Card Link</label>
+        <input type="text" id="blackcard" name="Black Card Link" placeholder="e.g. instagram.com/yourhandle">
+        <div class="hint">Noir Luxe comes with a Black Card. Drop a link here only if it should go somewhere different than your LED display's social handle, otherwise it'll link to the same place.</div>
+      </div>
+
       <div class="field">
         <label for="timeline">Target Timeline</label>
         <select id="timeline" name="Target Timeline">
@@ -401,6 +407,15 @@
       if (parts.length !== 2) return false;
       return freeDomains.includes(parts[1].toLowerCase());
     }
+
+    const modelSelect = document.getElementById('model');
+    const blackcardField = document.getElementById('blackcard-field');
+    function toggleBlackcard() {
+      const v = modelSelect.value;
+      blackcardField.style.display = (v === 'Noir Luxe' || v === 'Mix of models') ? 'block' : 'none';
+    }
+    modelSelect.addEventListener('change', toggleBlackcard);
+    toggleBlackcard();
 
     form.addEventListener('submit', async function (e) {
       e.preventDefault();
