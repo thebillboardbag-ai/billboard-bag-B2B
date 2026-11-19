@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Billboard Bag — Business Inquiries</title>
+<meta name="description" content="Billboard Bag for business — custom LED display backpacks for brands, retailers, and events. Wholesale and one-off orders.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0a;
+    --panel: #121212;
+    --panel-border: #2a2a2a;
+    --text: #f5f5f5;
+    --text-dim: #a0a0a0;
+    --accent: #ff2d55;
+    --accent-dim: #7a1830;
+    --success: #2ecc71;
+    --error: #ff5c5c;
+    --radius: 10px;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    line-height: 1.5;
+    min-height: 100vh;
+  }
+
+  .wrap {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 48px 24px 80px;
+  }
+
+  header.brand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 40px;
+  }
+
+  .badge {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    object-fit: cover;
+  }
+
+  .wordmark {
+    font-family: 'Anton', sans-serif;
+    font-size: 22px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .wordmark span {
+    color: var(--accent);
+  }
+
+  h1 {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(32px, 6vw, 48px);
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    margin: 0 0 12px;
+    line-height: 1.05;
+  }
+
+  .sub {
+    color: var(--text-dim);
+    font-size: 16px;
+    max-width: 520px;
+    margin: 0 0 40px;
+  }
+
+  .models-strip {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+  }
+
+  .model-chip {
+    border: 1px solid var(--panel-border);
+    border-radius: 999px;
+    padding: 7px 14px;
+    font-size: 13px;
+    color: var(--text-dim);
+  }
+
+  .model-chip strong {
+    color: var(--text);
+  }
+
+  form {
+    background: var(--panel);
+    border: 1px solid var(--panel-border);
+    border-radius: var(--radius);
+    padding: 32px;
+  }
+
+  .field {
+    margin-bottom: 22px;
+  }
+
+  .field:last-of-type {
+    margin-bottom: 0;
+  }
+
+  label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 7px;
+    color: var(--text);
+  }
+
+  .hint {
+    font-size: 12px;
+    color: var(--text-dim);
+    margin-top: 6px;
+    line-height: 1.4;
+  }
+
+  .hint a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  .hint a:hover {
+    text-decoration: underline;
+  }
+
+  input, select, textarea {
+    width: 100%;
+    background: #1a1a1a;
+    border: 1px solid var(--panel-border);
+    border-radius: 7px;
+    padding: 11px 13px;
+    color: var(--text);
+    font-size: 15px;
+    font-family: inherit;
+  }
+
+  input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 90px;
+  }
+
+  .row-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  @media (max-width: 520px) {
+    .row-2 { grid-template-columns: 1fr; }
+  }
+
+  .error-field {
+    font-size: 12px;
+    color: var(--error);
+    margin-top: 6px;
+    display: none;
+  }
+
+  .error-field.show {
+    display: block;
+  }
+
+  button[type="submit"] {
+    width: 100%;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 7px;
+    padding: 15px;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background 0.15s ease;
+  }
+
+  button[type="submit"]:hover {
+    background: #e0254b;
+  }
+
+  button[type="submit"]:disabled {
+    background: var(--accent-dim);
+    cursor: not-allowed;
+  }
+
+  .error-note {
+    display: none;
+    background: rgba(255, 92, 92, 0.1);
+    border: 1px solid var(--error);
+    color: var(--error);
+    border-radius: 7px;
+    padding: 12px 14px;
+    font-size: 13px;
+    margin-top: 16px;
+  }
+
+  .error-note.show {
+    display: block;
+  }
+
+  .thanks-panel {
+    display: none;
+    background: var(--panel);
+    border: 1px solid var(--panel-border);
+    border-radius: var(--radius);
+    padding: 48px 32px;
+    text-align: center;
+  }
+
+  .thanks-panel.show {
+    display: block;
+  }
+
+  .thanks-panel .check {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--success);
+    color: #0a0a0a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    margin: 0 auto 20px;
+  }
+
+  .thanks-panel h2 {
+    font-family: 'Anton', sans-serif;
+    text-transform: uppercase;
+    font-size: 24px;
+    margin: 0 0 10px;
+  }
+
+  .thanks-panel p {
+    color: var(--text-dim);
+    font-size: 15px;
+    margin: 0;
+  }
+
+  footer {
+    margin-top: 48px;
+    text-align: center;
+    font-size: 12px;
+    color: var(--text-dim);
+  }
+
+  footer a {
+    color: var(--text-dim);
+    text-decoration: underline;
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="brand">
+      <img src="assets/logo-badge.png" alt="Billboard Bag" class="badge">
+      <div class="wordmark">BILLBOARD<span>BAG</span></div>
+    </header>
+
+    <h1>Let's talk business.</h1>
+    <p class="sub">Custom LED display backpacks for brands, retailers, and events — whether you need one for an activation or a few hundred for your team. Tell us what you're after and we'll follow up with pricing.</p>
+
+    <div class="models-strip">
+      <span class="model-chip"><strong>Black OG</strong></span>
+      <span class="model-chip"><strong>Red Eye</strong></span>
+      <span class="model-chip"><strong>Noir Luxe</strong></span>
+      <span class="model-chip">LED display customization included</span>
+    </div>
+
+    <form id="b2b-form" action="https://formspree.io/f/xjywrzev" method="POST">
+      <div class="field">
+        <label for="company">Company Name</label>
+        <input type="text" id="company" name="Company Name" required>
+      </div>
+
+      <div class="row-2">
+        <div class="field">
+          <label for="contact">Contact Name</label>
+          <input type="text" id="contact" name="Contact Name" required>
+        </div>
+        <div class="field">
+          <label for="title">Title</label>
+          <input type="text" id="title" name="Title">
+        </div>
+      </div>
+
+      <div class="row-2">
+        <div class="field">
+          <label for="email">Work Email</label>
+          <input type="email" id="email" name="Work Email" required>
+          <div class="error-field" id="email-error">Please use your business email address, not a personal/free email provider.</div>
+        </div>
+        <div class="field">
+          <label for="phone">Phone Number</label>
+          <input type="tel" id="phone" name="Phone Number">
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="quantity">How Many Bags?</label>
+        <select id="quantity" name="Quantity" required>
+          <option value="" disabled selected>Select a range</option>
+          <option value="1 (one-off)">1 (one-off)</option>
+          <option value="2-9">2-9</option>
+          <option value="10-24">10-24</option>
+          <option value="25-49">25-49</option>
+          <option value="50-99 (wholesale)">50-99 (wholesale)</option>
+          <option value="100-249 (wholesale)">100-249 (wholesale)</option>
+          <option value="250-499 (wholesale)">250-499 (wholesale)</option>
+          <option value="500+ (wholesale)">500+ (wholesale)</option>
+          <option value="Not sure yet">Not sure yet</option>
+        </select>
+        <div class="hint">Orders of 50+ get wholesale pricing. Smaller quantities are priced at retail, per bag.</div>
+      </div>
+
+      <div class="field">
+        <label for="model">Which Model(s)?</label>
+        <select id="model" name="Model(s)" required>
+          <option value="" disabled selected>Select a model</option>
+          <option value="Black OG">Black OG</option>
+          <option value="Red Eye">Red Eye</option>
+          <option value="Noir Luxe">Noir Luxe</option>
+          <option value="Mix of models">Mix of models</option>
+          <option value="Not sure yet">Not sure yet</option>
+        </select>
+        <div class="hint">LED display customization (wording, images, QR codes) comes included — just share your brand kit below.</div>
+      </div>
+
+      <div class="field">
+        <label for="timeline">Target Timeline</label>
+        <select id="timeline" name="Target Timeline">
+          <option value="" disabled selected>Select a timeline</option>
+          <option value="ASAP">ASAP</option>
+          <option value="Within 2 weeks">Within 2 weeks</option>
+          <option value="Within 1 month">Within 1 month</option>
+          <option value="1-3 months">1-3 months</option>
+          <option value="Just exploring for now">Just exploring for now</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="details">Additional Details</label>
+        <textarea id="details" name="Additional Details" placeholder="Tell us about the use case, brand, or event this is for."></textarea>
+        <div class="hint">
+          Have logos, colors, or fonts for your LED display customization? Drop them in our
+          <a href="https://drive.google.com/drive/folders/1IBVV5F3yTD-G6PjglSUOG_F3rvN9KWhd" target="_blank" rel="noopener">brand kit folder</a>
+          and mention it here.
+        </div>
+      </div>
+
+      <button type="submit" id="submit-btn">Send Inquiry</button>
+      <div class="error-note" id="form-error">Something went wrong submitting the form. Please try again or email us directly.</div>
+    </form>
+
+    <div class="thanks-panel" id="thanks-panel">
+      <div class="check">✓</div>
+      <h2>Got it.</h2>
+      <p>Thanks for reaching out — we'll follow up shortly with pricing and next steps.</p>
+    </div>
+
+    <footer>
+      Billboard Bag &middot; <a href="https://billboardbag.com">billboardbag.com</a>
+    </footer>
+  </div>
+
+  <script>
+    const freeDomains = [
+      'gmail.com', 'yahoo.com', 'hotmail.com', 'outlook.com', 'icloud.com',
+      'aol.com', 'live.com', 'msn.com', 'me.com', 'mail.com', 'protonmail.com',
+      'proton.me', 'yandex.com', 'gmx.com', 'comcast.net', 'verizon.net', 'att.net'
+    ];
+
+    const form = document.getElementById('b2b-form');
+    const emailInput = document.getElementById('email');
+    const emailError = document.getElementById('email-error');
+    const formError = document.getElementById('form-error');
+    const submitBtn = document.getElementById('submit-btn');
+    const thanksPanel = document.getElementById('thanks-panel');
+
+    function isFreeDomain(email) {
+      const parts = email.split('@');
+      if (parts.length !== 2) return false;
+      return freeDomains.includes(parts[1].toLowerCase());
+    }
+
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      formError.classList.remove('show');
+      emailError.classList.remove('show');
+
+      const email = emailInput.value.trim();
+      if (isFreeDomain(email)) {
+        emailError.classList.add('show');
+        emailInput.focus();
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending...';
+
+      try {
+        const response = await fetch(form.action, {
+          method: 'POST',
+          headers: { 'Accept': 'application/json' },
+          body: new FormData(form)
+        });
+
+        if (response.ok) {
+          form.style.display = 'none';
+          thanksPanel.classList.add('show');
+        } else {
+          throw new Error('Submission failed');
+        }
+      } catch (err) {
+        formError.classList.add('show');
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Send Inquiry';
+      }
+    });
+  </script>
+</body>
+</html>
